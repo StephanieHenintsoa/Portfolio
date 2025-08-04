@@ -1,13 +1,316 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio de Razakamanana Henintsoa Stephanie</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- React et ReactDOM -->
+  <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <style>
+    :root {
+      --primary-brown: #8B5A2B; /* Marron principal */
+      --secondary-brown: #A67B5B; /* Marron plus clair */
+      --light-brown: #D9C2A6; /* Marron très clair */
+      --dark-brown: #5C4033; /* Marron foncé */
+      --gold-accent: #D4A017; /* Doré pour les accents */
+      --text-color: #333333;
+      --white: #FFFFFF;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--light-brown);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    .navbar {
+      background-color: var(--dark-brown) !important;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-brand, .nav-link {
+      color: var(--white) !important;
+      transition: color 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--gold-accent) !important;
+    }
+
+    #home {
+      background: linear-gradient(135deg, var(--primary-brown) 0%, var(--secondary-brown) 100%);
+      padding: 100px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #home h1 {
+      font-weight: 700;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      color: var(--white);
+    }
+
+    #home .btn-light {
+      background-color: var(--gold-accent);
+      color: var(--dark-brown);
+      border: none;
+      padding: 12px 24px;
+      border-radius: 25px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    #home .btn-light:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    #about, #contact, #skills {
+      background-color: var(--white);
+      border-radius: 15px;
+      margin: 50px 0;
+      padding: 50px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .card {
+      border: 2px solid var(--gold-accent);
+      border-radius: 15px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background-color: var(--white);
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .skill-logo {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 10px;
+      object-fit: contain;
+    }
+
+    .btn-primary {
+      background-color: var(--primary-brown);
+      border-color: var(--primary-brown);
+      border-radius: 25px;
+      padding: 10px 20px;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--gold-accent);
+      border-color: var(--gold-accent);
+      color: var(--dark-brown);
+      transform: translateY(-2px);
+    }
+
+    footer {
+      background-color: var(--dark-brown) !important;
+    }
+
+    footer a {
+      color: var(--gold-accent);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    footer a:hover {
+      color: var(--white);
+    }
+
+    .highlight {
+      background-color: var(--gold-accent);
+      color: var(--dark-brown);
+      padding: 2px 8px;
+      border-radius: 5px;
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script>
+    const { createElement: e } = React;
+
+    // Composant principal
+    function Portfolio() {
+      return e('div', null,
+        e(NavBar),
+        e(Header),
+        e(About),
+        e(Skills),
+        e(Contact),
+        e(Footer)
+      );
+    }
+
+    // Composant Navigation
+    function NavBar() {
+      return e('nav', { className: 'navbar navbar-expand-lg navbar-dark fixed-top' },
+        e('div', { className: 'container' },
+          e('a', { className: 'navbar-brand', href: '#' }, 'Portfolio de Stephanie'),
+          e('button', {
+            className: 'navbar-toggler',
+            type: 'button',
+            'data-bs-toggle': 'collapse',
+            'data-bs-target': '#navbarNav'
+          }, e('span', { className: 'navbar-toggler-icon' })),
+          e('div', { className: 'collapse navbar-collapse', id: 'navbarNav' },
+            e('ul', { className: 'navbar-nav ms-auto' },
+              e('li', { className: 'nav-item' },
+                e('a', { className: 'nav-link', href: '#home' }, 'Accueil')
+              ),
+              e('li', { className: 'nav-item' },
+                e('a', { className: 'nav-link', href: '#about' }, 'À propos')
+              ),
+              e('li', { className: 'nav-item' },
+                e('a', { className: 'nav-link', href: '#skills' }, 'Compétences')
+              ),
+              e('li', { className: 'nav-item' },
+                e('a', { className: 'nav-link', href: '#contact' }, 'Contact')
+              )
+            )
+          )
+        )
+      );
+    }
+
+    // Composant Header
+    function Header() {
+      return e('section', { id: 'home', className: 'text-white text-center py-5' },
+        e('div', { className: 'container' },
+          e('h1', { className: 'display-4' }, 'Bienvenue sur le Portfolio de Razakamanana Henintsoa Stephanie'),
+          e('p', { className: 'lead' }, 'Étudiante en informatique & Développeur FullStack'),
+          e('a', { href: '#skills', className: 'btn btn-light btn-lg mt-3' }, 'Voir mes compétences')
+        )
+      );
+    }
+
+    // Composant À propos
+    function About() {
+      return e('section', { id: 'about', className: 'py-5' },
+        e('div', { className: 'container' },
+          e('h2', { className: 'text-center mb-4' }, 'À propos de moi'),
+          e('div', { className: 'row' },
+            e('div', { className: 'col-md-6' },
+              e('img', { src: 'https://via.placeholder.com/300', className: 'img-fluid rounded-circle mb-3', alt: 'Profil' })
+            ),
+            e('div', { className: 'col-md-6' },
+              e('p', null, 'Étudiante en troisième année de licence en informatique à ITT University, spécialisation Développement, je suis passionnée par la conception de solutions numériques pratiques. Curieuse, organisée et investie, j’aime coder et apprendre de nouvelles approches pour améliorer mes compétences.'),
+              e('p', null, 'Mes compétences incluent :'),
+              e('ul', null,
+                e('li', null, 'HTML5, CSS3, JavaScript, React'),
+                e('li', null, 'Java, Spring Boot, Python, Frappe Framework'),
+                e('li', null, 'MySQL, Thymeleaf, design patterns (Factory, Singleton)'),
+                e('li', null, 'Git, architecture MVC, responsive design')
+              )
+            )
+          )
+        )
+      );
+    }
+
+    // Composant Compétences Techniques
+    function Skills() {
+      const skills = [
+        { name: 'HTML5', logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg' },
+        { name: 'CSS3', logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg' },
+        { name: 'JavaScript', logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg' },
+        { name: 'React', logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg' },
+        { name: 'Java', logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg' },
+        { name: 'Spring Boot', logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/spring/spring-original.svg' },
+        { name: 'Python', logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg' },
+        { name: 'Frappe Framework', logo: 'https://frappeframework.com/files/frappe.png' },
+        { name: 'MySQL', logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original.svg' },
+        { name: 'Thymeleaf', logo: 'https://www.thymeleaf.org/images/thymeleaf.png' }
+      ];
+
+      return e('section', { id: 'skills', className: 'py-5' },
+        e('div', { className: 'container' },
+          e('h2', { className: 'text-center mb-4' }, 'Compétences Techniques'),
+          e('div', { className: 'row' },
+            skills.map((skill, index) =>
+              e('div', { className: 'col-md-3 col-sm-6 mb-4', key: index },
+                e('div', { className: 'card text-center' },
+                  e('div', { className: 'card-body' },
+                    e('img', { src: skill.logo, className: 'skill-logo', alt: skill.name }),
+                    e('h5', { className: 'card-title' }, skill.name)
+                  )
+                )
+              )
+            )
+          )
+        )
+      );
+    }
+
+    // Composant Contact
+    function Contact() {
+      return e('section', { id: 'contact', className: 'py-5' },
+        e('div', { className: 'container' },
+          e('h2', { className: 'text-center mb-4' }, 'Contactez-moi'),
+          e('div', { className: 'row justify-content-center' },
+            e('div', { className: 'col-md-6' },
+              e('p', null,
+                e('strong', null, 'Email : '),
+                e('a', { href: 'mailto:henintsoasn16@gmail.com' }, 'henintsoasn16@gmail.com')
+              ),
+              e('p', null,
+                e('strong', null, 'Téléphone : '), '+26134067207'
+              ),
+              e('p', null,
+                e('strong', null, 'Localisation : '), 'Anakamahiby, Antananarivo'
+              ),
+              e('form', { name: 'contact', 'data-netlify': 'true' },
+                e('input', { type: 'hidden', name: 'form-name', value: 'contact' }),
+                e('div', { className: 'mb-3' },
+                  e('label', { htmlFor: 'name', className: 'form-label' }, 'Nom'),
+                  e('input', { type: 'text', className: 'form-control', id: 'name', name: 'name', placeholder: 'Votre nom' })
+                ),
+                e('div', { className: 'mb-3' },
+                  e('label', { htmlFor: 'email', className: 'form-label' }, 'Email'),
+                  e('input', { type: 'email', className: 'form-control', id: 'email', name: 'email', placeholder: 'Votre email' })
+                ),
+                e('div', { className: 'mb-3' },
+                  e('label', { htmlFor: 'message', className: 'form-label' }, 'Message'),
+                  e('textarea', { className: 'form-control', id: 'message', name: 'message', rows: '4', placeholder: 'Votre message' })
+                ),
+                e('button', { type: 'submit', className: 'btn btn-primary w-100' }, 'Envoyer')
+              )
+            )
+          )
+        )
+      );
+    }
+
+    // Composant Footer
+    function Footer() {
+      return e('footer', { className: 'bg-dark text-white text-center py-3' },
+        e('div', { className: 'container' },
+          e('p', null, '© 2025 Razakamanana Henintsoa Stephanie. Tous droits réservés.'),
+          e('div', null,
+            e('a', { href: '#', className: 'mx-2' }, 'LinkedIn'),
+            e('a', { href: '#', className: 'mx-2' }, 'GitHub'),
+            e('a', { href: '#', className: 'mx-2' }, 'Twitter')
+          )
+        )
+      );
+    }
+
+    // Rendu de l'application
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(e(Portfolio));
+
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>
